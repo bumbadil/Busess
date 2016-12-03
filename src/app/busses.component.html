@@ -1,0 +1,21 @@
+       <div *ngIf="selectedBus">
+      <h2>
+      {{selectedBus.name | uppercase}} is my hero
+      </h2>
+      <button (click)="gotoDetail()">View Details</button>
+    </div>
+    <div>
+        <label>Hero name:</label><input #heroName />
+        <button (click)="addBus(heroName.value); heroName.Value=''">
+            Add
+        </button>
+    </div>
+    <h2>My Busses</h2>
+    <ul class = "busses">
+        <li *ngFor="let bus of busses"
+        [class.selected] ="bus===selectedBus">
+        
+            <span class="badge">{{bus.id}}</span>
+            <span>{{bus.brand}}</span>
+        </li>
+    </ul>
