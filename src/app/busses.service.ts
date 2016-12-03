@@ -34,6 +34,20 @@ export class BusService{
             .catch(this.handleError);
         
     }
+    delete(id:number):Promise<void>{
+        const url = `${this.bussesUrl}/${id}`;
+        return this.http.delete(url, {headers: this.headers})
+        .toPromise()
+        .then(()=>null)
+        .catch(this.handleError);
+    }
+    update(bus:Bus):Promise<void>{
+        const url = `${this.bussesUrl}/${bus.id}`;
+        return this.http.put(url, JSON.stringify(bus))
+        .toPromise()
+        .then(()=>bus)
+        .catch(this.handleError);
+    }
     private handleError(error:any):Promise<any>{
         console.error('An error occured', error);
         return Promise.reject(error.message || error);
