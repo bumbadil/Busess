@@ -31,6 +31,14 @@ export class BussesComponent implements OnInit{
             this.selectedBus = null;
         });
     }
+    onSelect(bus:Bus):void{
+        console.log("clicleklm typa");
+        this.selectedBus =bus;
+    }
+    goToDetails():void{
+        let link = ['/busDetail',this.selectedBus.id];
+        this.router.navigate(link);
+    }
     ngOnInit():void{
         this.getHeroes();
     }
