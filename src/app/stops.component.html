@@ -1,0 +1,7 @@
+<h2>Issues</h2>
+<ul class="stops">
+    <li *ngFor="let stop of stops"
+    [class.selected] = "stop===selectedStop">
+    <span class="badge">{{stop.name}}</span>
+    </li>
+</ul>

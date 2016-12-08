@@ -9,13 +9,24 @@ export class BusService{
 
     constructor(private http: Http){}
 
-    private bussesUrl = 'app/buses'
+    private bussesUrl = '/buses'
 
     private headers = new Headers(
         {
+ 
             'Content-Type':'application/json'
         }
     );
+     private headersPOST = new Headers(
+        {
+            'Access-Token':'mBxdJ7Mt8DydcbmL82-Fvw',
+            'Client':'7rKXKZj1gPiQJ6ZcJf7bbg',
+            'Token-Type':'Bearer',
+            'Uid':'admin@test.com',
+            'Content-Type':'application/x-www-form-urlencoded'
+        }
+    );
+    private hp = new Headers();
     getBusses():Promise<Bus[]>{
         return this.http.get('http://pks-app.herokuapp.com/buses')
         .toPromise()
@@ -26,9 +37,17 @@ export class BusService{
         .then(busses=> busses.find(bus=>bus.id === id));
     }
     create(brand:string):Promise<Bus>{
+        this.hp.append('Access-Token','zflHuLMf7VYdhEz3gj4nBw');
+        this.hp.append('Client','QEVByXtNTEiAFv2fJo28Hw');
+        this.hp.append('Token-Type','Bearer');
+       this.hp.append('Uid','admin@test.com');
+        this.hp.append( 'Content-Type','application/x-www-form-urlencoded');
+        console.log(this.headersPOST);
+        console.log(this.headers);
+        const value = `brand=Auto&spaces=190&registration_number=DLB+1234`;
         return this.http.post(
-            this.bussesUrl, JSON.stringify({brand:brand}),
-            {headers:this.headers})
+            'http://pks-app.herokuapp.com/buses', value,
+            {headers:this.hp})
             .toPromise()
             .then(res=>res.json().data)
             .catch(this.handleError);

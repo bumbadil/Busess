@@ -23,12 +23,14 @@ export class AuthService{
             {
                 res.json().data;
 
-                    localStorage.setItem('auth_token', res.headers.get('access-token'));
-                    localStorage.setItem('client', res.headers.get('client'));
+                    //localStorage.setItem('auth_token', res.headers.get('access-token'));
+                    //localStorage.setItem('client', res.headers.get('client'));
+                    console.log(res.headers.get('Access-Token'));
                     this.loggedIn = true;
                 
             })
-            .catch(this.handleError);          
+            .then(()=>this.IsLoggedIn())
+            .catch(this.handleError);        
         }
     private handleError(error:any): Promise<any>{
         console.error('An error occured', error);
@@ -36,8 +38,10 @@ export class AuthService{
     }
 
     IsLoggedIn():boolean{
+        console.log('czesc');
         if(this.loggedIn)
         {
+            console.log('lol');
             console.log(localStorage.getItem('auth_token'));
             console.log(localStorage.getItem('client'));  
             return true;  

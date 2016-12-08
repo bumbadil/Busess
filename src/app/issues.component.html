@@ -1,0 +1,8 @@
+<h2>Issues</h2>
+<ul class="issues">
+    <li *ngFor="let issue of issues"
+    [class.selected] = "issue===selectedIssue">
+    <span class="badge">{{issue.name}}</span>
+    <span>{{issue.description}}</span>
+    </li>
+</ul>

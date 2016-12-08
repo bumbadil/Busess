@@ -7,17 +7,22 @@ import { AppComponent } from './app.component';
 import {BusService} from './busses.service';
 import {AuthService} from './auth.service';
 import {BussesComponent} from './busses.component';
+import {IssuesComponent} from './issues.component';
+import {StopsComponent} from './stops.component';
+import {MockService} from './in-memory-data.serice';
 import {LoginComponent} from './login.component';
 @NgModule({
   declarations: [
-    AppComponent,BussesComponent, LoginComponent
+    AppComponent,BussesComponent
+    ,IssuesComponent,
+    StopsComponent, LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,AppRoutingModule
   ],
-  providers: [BusService,AuthService],
+  providers: [BusService,AuthService, MockService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

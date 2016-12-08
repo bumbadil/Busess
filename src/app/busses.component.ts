@@ -12,7 +12,7 @@ export class BussesComponent implements OnInit{
     bus : Bus;
 
     busses : Bus[];
-    selecedBus:Bus;
+    selectedBus:Bus;
     constructor(private busService:BusService, private router:Router){
 
     }
@@ -28,7 +28,7 @@ export class BussesComponent implements OnInit{
         this.busService.create(brand)
         .then(bus=>{
             this.busses.push(bus);
-            this.selecedBus = null;
+            this.selectedBus = null;
         });
     }
     ngOnInit():void{

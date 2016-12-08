@@ -26,7 +26,7 @@ export class IssuesService{
          .catch(this.errorHandler);
      }
      update(issue:Issue):Promise<Issue>{
-         const url = `${this.issueUrl}/${issue.bus.id}`;
+         const url = `${this.issueUrl}/${issue.busID}`;
          return this.http.put(url, JSON.stringify(issue), {headers : this.headers})
          .toPromise()
          .then(()=>issue)
@@ -40,7 +40,7 @@ export class IssuesService{
          .catch(this.errorHandler);
      }
      create(issue:Issue):Promise<Issue>{
-         const url = this.busIssueUrl.replace('placeHolder',`${issue.bus.id}`);
+         const url = this.busIssueUrl.replace('placeHolder',`${issue.busID}`);
          return this.http.post(url, JSON.stringify(issue), {headers:this.headers})
          .toPromise()
          .then(res=>res.json().data)
