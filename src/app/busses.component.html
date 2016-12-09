@@ -4,12 +4,12 @@
       </h2>
       <button (click)="gotoDetail()">View Details</button>
     </div>-->
-    <div>
-        <label>Hero name:</label><input #heroName />
+    <!--<div>
+        <label>Bus name:</label><input #heroName />
         <button (click)="addBus(heroName.value); heroName.Value=''">
             Add
         </button>
-    </div>
+    </div>-->
     <h2>My Busses</h2>
     <ul class = "busses">
         <li *ngFor="let bus of busses"

@@ -10,33 +10,41 @@ export class AuthService{
   private headers = new Headers(
         {
             'Content-Type':'application/x-www-form-urlencoded'
-        }
-    );
+        });
+    private headersPOST = new Headers(
+        {
+            'Access-Token':'',
+            'Client':'',
+            'Token-Type':'',
+            'Uid':'',
+            'Content-Type':'application/x-www-form-urlencoded'
+        });
+    
     private loggedIn:boolean = false;
 
         login(login:string, password:string):Promise<User>{
             console.log('format=json&email='+login+'&password='+password);
             return this.http.post('http://pks-app.herokuapp.com/auth/sign_in',
-            'format=json&email='+login+'&password='+password,{headers : this.headers})
+            'format=json&email='+login+'&password='+password,{headers : this.headersPOST})
             .toPromise()
-            .then(res=>
-            {
-                res.json().data;
-
-                    //localStorage.setItem('auth_token', res.headers.get('access-token'));
-                    //localStorage.setItem('client', res.headers.get('client'));
-                    console.log(res.headers.get('Access-Token'));
-                    this.loggedIn = true;
-                
-            })
-            .then(()=>this.IsLoggedIn())
+            .then(res=> res.json().data) 
+            // .then(res=>{
+            //     console.log(res);
+            //     this.loggedIn = true;
+            // })
+            // .then(()=>this.IsLoggedIn())
             .catch(this.handleError);        
         }
+
+
     private handleError(error:any): Promise<any>{
         console.error('An error occured', error);
         return Promise.reject(error.message || error);
     }
-
+    logout():void{
+        localStorage.removeItem('Access-Token');
+        this.loggedIn = false;
+    }
     IsLoggedIn():boolean{
         console.log('czesc');
         if(this.loggedIn)

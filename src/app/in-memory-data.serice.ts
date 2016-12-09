@@ -17,7 +17,13 @@ export class MockService{
     getIssues():Issue[]{
         return this.issues;
     }
-
+    getIssue(busID:number):Issue[]{
+      return this.getIssues()
+      .filter(function(issue){
+          return issue.busID ===busID
+      });
+    }
+    
     getStops():Stop[]{
         return this.stops;
     }
