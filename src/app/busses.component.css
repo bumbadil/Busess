@@ -22,6 +22,10 @@
     background-color: #BBD8DC !important;
     color: white;
   }
+  .busses li.free:hover{
+    background-color: red !important;
+    color: white;
+  }
   .busses li:hover {
     color: #607D8B;
     background-color: #DDD;
@@ -50,5 +54,12 @@
   margin-top: 2px;
   margin-right: .8em;
   background-color: gray !important;
+  color:white;
+}
+button.deleteBus{
+  float:right;
+  margin-top: 2px;
+  margin-right: .8em;
+  background-color:darkred !important;
   color:white;
 }

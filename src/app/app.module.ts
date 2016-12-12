@@ -14,6 +14,7 @@ import {LoginComponent} from './login.component';
 import {BusDetailComponent} from './bus-detail.component';
 import {DashboardComponent} from './dashboard.component';
 import {ProfileComponent} from './profile.component';
+
 @NgModule({
   declarations: [
     AppComponent,BussesComponent

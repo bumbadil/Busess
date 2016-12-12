@@ -12,6 +12,8 @@ import {Bus} from './bus';
 export class BusDetailComponent implements OnInit{
     @Input()
     bus:Bus;
+    @Input()
+    isNew:boolean;
 
     constructor(private busDetailService:BusService
     ,private route:ActivatedRoute
@@ -22,14 +24,20 @@ export class BusDetailComponent implements OnInit{
         this.route.params.forEach((params:Params)=>
         {
             let id =+params['id'];
+            if(id !=0 ){;
             this.busDetailService.getBus(id)
-            .then(bus=>this.bus = bus);
+            .then(bus=>this.bus = bus);  
+            this.isNew = false;      
+            }else{
+                this.bus = new Bus();  
+                this.isNew = true;        
+            }
         })
     }
 
     goBack():void{
         this.location.back();
     }
-    
+
     
 }

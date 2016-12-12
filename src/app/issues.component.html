@@ -1,4 +1,4 @@
-<div *ngIf = "issues.length>0">
+<!--<div *ngIf = "issues.length>0">
 <h2>Issues</h2>
 <ul class="issues">
     <li *ngFor="let issue of issues"
@@ -8,4 +8,25 @@
     <span>{{issue.description}}</span>
     </li>
 </ul>
-</div>
+</div>-->
+
+
+     <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <div *ngIf = "issues.length>0">
+    <h1>Issues</h1>
+    <ul class = "list-group">
+        <li *ngFor="let issue of issues" class="list-group-item"
+        [class.selected] ="issue===selectedIssue"
+        [class.NotResolved] ="!issue.solved"
+        [class.resolved] = "issue.solved">
+                <span>{{issue.name}}</span>
+                <span>{{issue.description}}</span>
+            <button class="delete" (click)="goToDetails()"> View</button>
+            <button class="deleteBus" >Delete</button>
+        </li>
+    </ul>
+    </div>

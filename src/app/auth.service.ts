@@ -25,17 +25,48 @@ export class AuthService{
         login(login:string, password:string):Promise<User>{
             console.log('format=json&email='+login+'&password='+password);
             return this.http.post('http://pks-app.herokuapp.com/auth/sign_in',
-            'format=json&email='+login+'&password='+password,{headers : this.headersPOST})
+            'format=json&email='+login+'&password='+password,{headers : this.headers})
             .toPromise()
-            .then(res=> res.json().data) 
+            .then(
+                res => 
+                   // debugger;
+                    //res.json().data
+                    
+                    console.log(res.headers)
+                ) 
             // .then(res=>{
-            //     console.log(res);
+            //     console.log(res.headers);
             //     this.loggedIn = true;
             // })
             // .then(()=>this.IsLoggedIn())
             .catch(this.handleError);        
         }
-
+//  login(login:string, password:string){
+//            console.log('format=json&email='+login+'&password='+password);
+//            console.log({
+//                 format : 'json',
+//                 email: login,
+//                 password:password
+//             });
+//             return this.http.post('http://pks-app.herokuapp.com/auth/sign_in',
+//             JSON.stringify({
+//                 format : 'json',
+//                 email: login,
+//                 password:password
+//             }),{headers : this.headers})
+//             .toPromise()
+//             .subscribe(
+//                 (res) => {
+//                     res.json().data;
+//                     console.log(res.headers)
+//                 }) ;
+//             .then(res=>{
+//                 console.log(res.headers);
+//                 this.loggedIn = true;
+//             })
+//             .then(()=>this.IsLoggedIn())
+//             .catch(this.handleError);        
+//         }
 
     private handleError(error:any): Promise<any>{
         console.error('An error occured', error);

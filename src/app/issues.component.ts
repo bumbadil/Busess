@@ -27,12 +27,15 @@ export class IssuesComponent implements OnInit{
     }
     @Input()
     BusID:number;
+    @Input()
+    isOnDetails:boolean;
 
     ngOnInit():void{
-        if(this.BusID!=null){
-        this.getIssue(this.BusID);
+        console.log(this.BusID);
+        if(!this.isOnDetails){     
+         this.getIssues();
         }else{       
-        this.getIssues();
+         this.getIssue(this.BusID);
         }
     }
 

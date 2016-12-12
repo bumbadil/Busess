@@ -1,16 +1,22 @@
 <div *ngIf = "bus">
   <!--<h2>{{bus.name}} details</h2>-->
-    <div><label> id: </label>{{bus.id}}</div>
-     <div><label> Brand: </label>{{bus.brand}}</div>
-      <div><label> Spaces: </label>{{bus.spaces}}</div>
-      <div><label> Registration Number: </label>{{bus.registration_number}}</div>
+    <div><label> id: </label>
+    <input type="number" [(ngModel)]="bus.id" [readonly]="!this.isNew"></div>
+     <div><label> Brand: </label>
+     <input type="text" [(ngModel)]="bus.brand" [readonly]="!this.isNew"></div>
+      <div><label> Spaces: </label>
+      <input type="number" [(ngModel)]="bus.spaces" [readonly]="!this.isNew"></div>
+      <div><label> Registration Number: </label>
+      <input type="text" [(ngModel)]="bus.registration_number" [readonly]="!this.isNew"></div>
     <div>
         <!--<label>name :</label>-->
     </div>
     <div>
         <issues 
-        [BusID]="bus.id">
+        [BusID]="bus.id"
+        [isOnDetails]="true">
         </issues>
     </div>
-    <button (click)="goBack()"> Back</button>
+
+        <button type="button" class="btn btn-default navbar-btn" (click)="goBack()">Back</button>
     </div>

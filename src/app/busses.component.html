@@ -10,14 +10,21 @@
             Add
         </button>
     </div>-->
-    <h2>My Busses</h2>
-    <ul class = "busses">
-        <li *ngFor="let bus of busses"
+     <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <h1> Busses</h1>
+    <ul class = "list-group">
+        <li *ngFor="let bus of busses" class="list-group-item"
         [class.selected] ="bus===selectedBus"
         (click)="onSelect(bus)">
         
-            <span class="badge">{{bus.id}}</span>
+            <!--<span class="badge">{{bus.id}}</span>-->
             <span>{{bus.brand}}</span>
             <button class="delete" (click)="goToDetails()"> View</button>
+            <button class="deleteBus" >Delete</button>
         </li>
     </ul>
+    <button type="button" class="btn btn-default navbar-btn" (click)="createNew()">Add</button>
