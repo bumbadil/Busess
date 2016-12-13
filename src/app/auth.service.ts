@@ -30,14 +30,14 @@ export class AuthService{
             .then(
                 res => 
                    // debugger;
-                    //res.json().data
-                    
-                    console.log(res.headers)
+                    res.json().data
+                    //this.loggedIn= true
+                   // console.log(res.headers)
                 ) 
-            // .then(res=>{
-            //     console.log(res.headers);
-            //     this.loggedIn = true;
-            // })
+            .then(res=>{
+               // console.log(res.header
+                this.loggedIn = true;
+            })
             // .then(()=>this.IsLoggedIn())
             .catch(this.handleError);        
         }

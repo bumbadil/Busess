@@ -14,6 +14,7 @@ import {LoginComponent} from './login.component';
 import {BusDetailComponent} from './bus-detail.component';
 import {DashboardComponent} from './dashboard.component';
 import {ProfileComponent} from './profile.component';
+import {AuthGuard} from './auth-guard';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import {ProfileComponent} from './profile.component';
     FormsModule,
     HttpModule,AppRoutingModule
   ],
-  providers: [BusService,AuthService, MockService],
+  providers: [BusService,AuthService, MockService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

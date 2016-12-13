@@ -7,9 +7,10 @@ import {IssuesComponent} from './issues.component';
 import {DashboardComponent} from './dashboard.component';
 import {StopsComponent} from './stops.component';
 import {ProfileComponent} from './profile.component';
+import {AuthGuard} from './auth-guard';
 const routes: Routes= [
     {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-    {path: 'busses', component: BussesComponent},
+    {path: 'busses', component: BussesComponent, canActivate: [AuthGuard]},
     {path: 'login', component: LoginComponent},
     {path: 'issues', component: IssuesComponent},
     {path: 'busDetail/:id', component: BusDetailComponent},
