@@ -7,7 +7,9 @@ import 'rxjs/add/operator/toPromise';
 export class IssuesService{
 
     private busIssueUrl = 'busess/placeHolder/issues';
-    private issueUrl = '/issues'
+   // private issueUrl = '/issues';
+   private issueUrl ='app/issues';
+    private mockURL = 'app/issues';
     private headers = new  Headers(  
         {
             'Content-Type':'application/json'
@@ -17,7 +19,17 @@ export class IssuesService{
         
         
     }
+     getIssuesList():Promise<Issue[]>{
+         return this.http.get(this.mockURL)
+         .toPromise()
+         .then(res=>res.json() as Issue[])
 
+    }
+        getIssue():Promise<Issue[]>{
+        return this.http.get(this.mockURL)
+         .toPromise()
+         .then(res=>res.json().data as Issue[])
+        }
      getIssues(id:number):Promise<Issue>{
          const url = this.busIssueUrl.replace('placeHolder',`${id}`);
          return this.http.get(url)
@@ -25,8 +37,19 @@ export class IssuesService{
          .then(res=>res.json().data as Issue[])
          .catch(this.errorHandler);
      }
+     getIssueMock(id:number):Promise<Issue[]>{
+          return this.getIssue()
+          .then(issues=>issues.filter(issue=>issue.busID===id));
+     }
      update(issue:Issue):Promise<Issue>{
          const url = `${this.issueUrl}/${issue.busID}`;
+         return this.http.put(url, JSON.stringify(issue), {headers : this.headers})
+         .toPromise()
+         .then(()=>issue)
+         .catch(this.errorHandler);
+     }
+     updatem(issue:Issue):Promise<Issue>{
+         const url = `${this.issueUrl}/${issue.id}`;
          return this.http.put(url, JSON.stringify(issue), {headers : this.headers})
          .toPromise()
          .then(()=>issue)
@@ -42,6 +65,13 @@ export class IssuesService{
      create(issue:Issue):Promise<Issue>{
          const url = this.busIssueUrl.replace('placeHolder',`${issue.busID}`);
          return this.http.post(url, JSON.stringify(issue), {headers:this.headers})
+         .toPromise()
+         .then(res=>res.json().data)
+         .catch(this.errorHandler);
+     }
+     createm(issue:Issue):Promise<Issue>{
+       //  const url = this.busIssueUrl.replace('placeHolder',`${issue.busID}`);
+         return this.http.post(this.issueUrl, JSON.stringify(issue), {headers:this.headers})
          .toPromise()
          .then(res=>res.json().data)
          .catch(this.errorHandler);

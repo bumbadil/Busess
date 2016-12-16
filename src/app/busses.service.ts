@@ -9,8 +9,9 @@ export class BusService{
 
     constructor(private http: Http){}
 
-    private bussesUrl = '/buses'
-
+    //private bussesUrl = '/buses'
+    private bussesUrl = 'app/busses'
+    private mockURL = 'app/busses'
     private headers = new Headers(
         {
  
@@ -28,9 +29,10 @@ export class BusService{
     );
     private hp = new Headers();
     getBusses():Promise<Bus[]>{
-        return this.http.get('http://pks-app.herokuapp.com/buses')
+        //return this.http.get('http://pks-app.herokuapp.com/buses')
+        return this.http.get(this.mockURL)
         .toPromise()
-        .then(response => response.json() as Bus[])
+        .then(response => response.json().data as Bus[])
     }
     getBus(id:number):Promise<Bus>{
         return this.getBusses()
@@ -53,13 +55,24 @@ export class BusService{
             .catch(this.handleError);
         
     }
+    createBus(bus:Bus):Promise<Bus>{
+        return this.http.post(this.bussesUrl
+        ,JSON.stringify(bus))
+        .toPromise()
+        .then(res => res.json().data);
+    }
     delete(id:number):Promise<void>{
-        const url = `${this.bussesUrl}/${id}`;
+        const url = `${this.mockURL}/${id}`;
         return this.http.delete(url, {headers: this.headers})
         .toPromise()
         .then(()=>null)
         .catch(this.handleError);
     }
+    // deletem(id:number):Promise<void>{
+    //     return this.http.delete(this.mockURL)
+    //     .toPromise()
+    //     .then(()=>null);
+    // }
     update(bus:Bus):Promise<void>{
         const url = `${this.bussesUrl}/${bus.id}`;
         return this.http.put(url, JSON.stringify(bus))

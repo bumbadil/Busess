@@ -6,8 +6,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class MockService{
     issues:Issue[] = [
-        {name:'dziura', description:'w oponie', busID:12, solved:false},
-        {name:'szpara', description:'w drzwiach', busID:13, solved:true},
+        {id:1,name:'dziura', description:'w oponie', busID:12, solved:false},
+        {id:2,name:'szpara', description:'w drzwiach', busID:13, solved:true},
     ]
     stops:Stop[]= [
         {name:'Wroclaw'},

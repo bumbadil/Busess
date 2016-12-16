@@ -34,7 +34,10 @@ export class BusDetailComponent implements OnInit{
             }
         })
     }
-
+    save():void{
+        this.busDetailService.createBus(this.bus)
+        .then(()=>this.location.back());
+    }
     goBack():void{
         this.location.back();
     }

@@ -16,7 +16,7 @@ export class BussesComponent implements OnInit{
     constructor(private busService:BusService, private router:Router){
 
     }
-    getHeroes():void{
+    getBusses():void{
         this.busService.getBusses().then(
             busses => this.busses = busses
         );
@@ -32,8 +32,17 @@ export class BussesComponent implements OnInit{
         });
     }
     onSelect(bus:Bus):void{
-        console.log("clicleklm typa");
         this.selectedBus =bus;
+    }
+    delete(bus:Bus):void{
+        this.busService.delete(bus.id)
+        .then(()=>{
+            this.busses = this.busses.filter(
+                b=> b!== bus);
+                if(this.selectedBus===bus){
+                    this.selectedBus=null;
+                }       
+        });
     }
     goToDetails():void{
         let link = ['/busDetail',this.selectedBus.id];
@@ -44,6 +53,6 @@ export class BussesComponent implements OnInit{
         this.router.navigate(link);
     }
     ngOnInit():void{
-        this.getHeroes();
+        this.getBusses();
     }
 }
