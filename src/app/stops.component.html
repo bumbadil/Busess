@@ -1,7 +1,25 @@
-<h2>Stops</h2>
+<!--<h2>Stops</h2>
 <ul class="stops">
     <li *ngFor="let stop of stops"
     [class.selected] = "stop===selectedStop">
     <span class="badge">{{stop.name}}</span>
     </li>
-</ul>
+</ul>-->
+
+     <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--<div *ngIf = "issues.length>0">-->
+    <h1>Stops</h1>
+    <ul class = "list-group">
+        <li *ngFor="let stop of stops" class="list-group-item"
+        [class.selected] = "stop===selectedStop"
+        (click)="onSelect()">
+                <span>{{stop.name}}</span>
+            <!--<button class="delete" (click)="goToDetails()"> View</button>-->
+
+        </li>
+    </ul>
+    <!--</div>-->
