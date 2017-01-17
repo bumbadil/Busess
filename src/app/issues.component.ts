@@ -24,7 +24,7 @@ export class IssuesComponent implements OnInit{
     }
     getIssue(id:number):void{
      //  this.issues = this.issuesService.getIssue(id);
-         this.issuesService.getIssueMock(id)
+         this.issuesService.getIssues(id)
          .then(issues=> this.issues = issues);
          //.then(issues => this.issues.push(issues.find(issue=>issue.busID != id )));
     }
@@ -59,7 +59,7 @@ export class IssuesComponent implements OnInit{
     }
     resolve(issue:Issue):void{
         issue.solved = true;
-        this.issuesService.updatem(issue)
+        this.issuesService.update(issue)
         .then(()=>null);
     }
     ngOnInit():void{

@@ -31,7 +31,7 @@ import { InMemoryDataService }  from './mockApi';
     BrowserModule,
     FormsModule,
     HttpModule,AppRoutingModule, InMemoryWebApiModule.forRoot(InMemoryDataService)
-  ],
+   ],
   providers: [BusService,AuthService, MockService, AuthGuard,IssuesService],
   bootstrap: [AppComponent]
 })

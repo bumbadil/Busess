@@ -10,14 +10,17 @@ import {ProfileComponent} from './profile.component';
 import {AuthGuard} from './auth-guard';
 const routes: Routes= [
     {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-    // {path: 'busses', component: BussesComponent, canActivate: [AuthGuard]},
-    {path: 'busses', component: BussesComponent},
+    {path: 'busses', component: BussesComponent, canActivate: [AuthGuard]},
+    //{path: 'busses', component: BussesComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'issues', component: IssuesComponent},
-    {path: 'busDetail/:id', component: BusDetailComponent},
+    //{path: 'issues', component: IssuesComponent},
+    {path: 'issues', component: IssuesComponent, canActivate: [AuthGuard]},
+    //{path: 'busDetail/:id', component: BusDetailComponent},
+    {path: 'busDetail/:id', component: BusDetailComponent, canActivate: [AuthGuard]},
     {path: 'busDetail', component: BusDetailComponent},
     {path: 'dashboard', component: DashboardComponent},
-    {path: 'stops', component: StopsComponent},
+    //{path: 'stops', component: StopsComponent},
+    {path: 'stops', component: StopsComponent, canActivate: [AuthGuard]},
     {path: 'profile', component: ProfileComponent}
 ];
 

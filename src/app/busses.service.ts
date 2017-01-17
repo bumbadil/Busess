@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {Bus} from './bus';
-
+let $ = require('/usr/local/lib/node_modules/jquery/dist/jquery.min.js');
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -28,19 +28,29 @@ export class BusService{
         }
     );
     private hp = new Headers();
-    getBusses():Promise<Bus[]>{
-        //return this.http.get('http://pks-app.herokuapp.com/buses')
-        return this.http.get(this.mockURL)
+    getBussesOLD():Promise<Bus[]>{
+        return this.http.get('http://pks-app.herokuapp.com/buses')
+       // return this.http.get(this.mockURL)
         .toPromise()
         .then(response => response.json().data as Bus[])
+    }
+    getBusses():Promise<Bus[]>{
+       return $.ajax({
+           method: 'GET',
+           url: 'http://pks-app.herokuapp.com/buses',
+           success: function(msg, a, res){
+               var obj  = res.responseJSON.data as Bus[]
+               return obj
+           }           
+        });
     }
     getBus(id:number):Promise<Bus>{
         return this.getBusses()
         .then(busses=> busses.find(bus=>bus.id === id));
     }
-    create(brand:string):Promise<Bus>{
-        this.hp.append('Access-Token','zflHuLMf7VYdhEz3gj4nBw');
-        this.hp.append('Client','QEVByXtNTEiAFv2fJo28Hw');
+    createOLD(brand:string):Promise<Bus>{
+        // this.hp.append('Access-Token','E3UlbgzkJSdOodSAvdOREg');
+        // this.hp.append('Client','CseeS16lQfrJImeZ4t2VwA');
         this.hp.append('Token-Type','Bearer');
        this.hp.append('Uid','admin@test.com');
         this.hp.append( 'Content-Type','application/x-www-form-urlencoded');
@@ -55,18 +65,69 @@ export class BusService{
             .catch(this.handleError);
         
     }
+    create(bus:Bus):Promise<any>{
+        let token:string = localStorage.getItem('token');
+        let client:string = localStorage.getItem('client');
+        this.hp.append('Access-Token',token);
+        this.hp.append('Client', client);
+       this.hp.append('Token-Type','Bearer');
+       this.hp.append('Uid','admin@test.com');
+        this.hp.append( 'Content-Type','application/x-www-form-urlencoded');
+        console.log(bus);
+        return $.ajax({
+            type: "POST",
+            url: 'http://pks-app.herokuapp.com/buses',
+            beforeSend: function(xhr){
+                xhr.setRequestHeader
+                xhr.setRequestHeader('Access-Token',token);
+        xhr.setRequestHeader('Client', client);
+       xhr.setRequestHeader('Token-Type','Bearer');
+       xhr.setRequestHeader('Uid','admin@test.com');
+        xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+            },
+            data: {
+            brand:bus.brand,
+            registration_number: bus.registration_number,
+            spaces: bus.spaces    
+            },
+           // headers: this.hp,
+            success:function(msg, a , res){
+                console.log(res);
+                return msg;
+            }
+        });
+    }
     createBus(bus:Bus):Promise<Bus>{
         return this.http.post(this.bussesUrl
         ,JSON.stringify(bus))
         .toPromise()
         .then(res => res.json().data);
     }
-    delete(id:number):Promise<void>{
+    deleteOLD(id:number):Promise<void>{
         const url = `${this.mockURL}/${id}`;
         return this.http.delete(url, {headers: this.headers})
         .toPromise()
         .then(()=>null)
         .catch(this.handleError);
+    }
+    delete(id:number):Promise<void>{
+       let token:string = localStorage.getItem('token');
+        let client:string = localStorage.getItem('client');
+        return $.ajax({
+            type : "DELETE",
+            beforeSend: function(xhr){
+                xhr.setRequestHeader
+                xhr.setRequestHeader('Access-Token',token);
+        xhr.setRequestHeader('Client', client);
+       xhr.setRequestHeader('Token-Type','Bearer');
+       xhr.setRequestHeader('Uid','admin@test.com');
+        xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+            },
+            url: `${'http://pks-app.herokuapp.com/buses'}/${id}`,
+            success:function(msg, a, res){
+                console.log('deleted');
+            }
+        });
     }
     // deletem(id:number):Promise<void>{
     //     return this.http.delete(this.mockURL)

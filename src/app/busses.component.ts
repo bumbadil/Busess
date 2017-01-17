@@ -25,7 +25,7 @@ export class BussesComponent implements OnInit{
         console.log(brand);
         brand = brand.trim();
         if(!brand) {return;}
-        this.busService.create(brand)
+        this.busService.createOLD(brand)
         .then(bus=>{
             this.busses.push(bus);
             this.selectedBus = null;

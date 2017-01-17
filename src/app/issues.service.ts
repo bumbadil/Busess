@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {Issue} from './issue';
 import 'rxjs/add/operator/toPromise';
-
+let $ = require('/usr/local/lib/node_modules/jquery/dist/jquery.min.js');
 @Injectable()
 export class IssuesService{
 
@@ -30,23 +30,66 @@ export class IssuesService{
          .toPromise()
          .then(res=>res.json().data as Issue[])
         }
-     getIssues(id:number):Promise<Issue>{
+     getIssuesOLD(id:number):Promise<Issue>{
          const url = this.busIssueUrl.replace('placeHolder',`${id}`);
          return this.http.get(url)
          .toPromise()
          .then(res=>res.json().data as Issue[])
          .catch(this.errorHandler);
      }
+     getIssues(id:number):Promise<Issue[]>{
+         const url = `${'http://pks-app.herokuapp.com/buses'}/${id}/${'issues'}`;
+        let token:string = localStorage.getItem('token');
+        let client:string = localStorage.getItem('client');
+         return $.ajax({
+             type: "GET",
+             url: url,
+             beforeSend: function(xhr){
+                xhr.setRequestHeader
+                xhr.setRequestHeader('Access-Token',token);
+        xhr.setRequestHeader('Client', client);
+       xhr.setRequestHeader('Token-Type','Bearer');
+       xhr.setRequestHeader('Uid','admin@test.com');
+        xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+            }, 
+            success:function(msg, a, res){
+                return res.responseJson.data as Issue[];
+            }
+         });
+     }
      getIssueMock(id:number):Promise<Issue[]>{
           return this.getIssue()
           .then(issues=>issues.filter(issue=>issue.busID===id));
      }
-     update(issue:Issue):Promise<Issue>{
+     updateOLD(issue:Issue):Promise<Issue>{
          const url = `${this.issueUrl}/${issue.busID}`;
          return this.http.put(url, JSON.stringify(issue), {headers : this.headers})
          .toPromise()
          .then(()=>issue)
          .catch(this.errorHandler);
+     }
+     update(issue:Issue):Promise<Issue>{
+         const url = `${'http://pks-app.herokuapp.com/issues'}/${issue.id}`;
+         let token:string = localStorage.getItem('token');
+        let client:string = localStorage.getItem('client');
+         return $.ajax({
+             type: 'OPTIONS',
+             url:url,
+             body:
+                 {solved:true}
+             ,
+             beforeSend: function(xhr){
+                xhr.setRequestHeader
+                xhr.setRequestHeader('Access-Token',token);
+        xhr.setRequestHeader('Client', client);
+       xhr.setRequestHeader('Token-Type','Bearer');
+       xhr.setRequestHeader('Uid','admin@test.com');
+        xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+            }, 
+            success: function(msg, a, res){
+                return res.responseJson.data as Issue;
+            }
+         });
      }
      updatem(issue:Issue):Promise<Issue>{
          const url = `${this.issueUrl}/${issue.id}`;
