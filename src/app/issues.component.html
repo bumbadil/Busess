@@ -19,16 +19,30 @@
     <!--<div *ngIf = "issues.length>0">-->
     <h1>Issues</h1>
     <ul class = "list-group">
-        <li *ngFor="let issue of issues" class="list-group-item"
+        <li *ngFor="let issue of issues" class="list-group-item" id="name"
         [class.selected] ="issue===selectedIssue"
         [class.NotResolved] ="!issue.solved"
         [class.resolved] = "issue.solved"
         (click)="onSelect()">
-                <span>{{issue.name}}</span>
-                <span>{{issue.description}}</span>
-            <!--<button class="delete" (click)="goToDetails()"> View</button>-->
+            <div>
+                <h5 class="mb-1">{{issue.name}}
+                <!--<a data-toggle="collapse" data-parent="name" href="#issues#target">{{issue.name}}</a>-->
+                     <small>
             <button class="deleteBus" (click)="delete(issue)">Delete</button>
             <button class="delete" (click)="resolve(issue)">Resolve</button>
+            </small>
+            </h5>
+                </div>
+                <div>
+                    <!--<span>{{issue.description}}</span> -->
+                 <span >    {{issue.description}}</span>
+                </div>
+                  
+            <!--<button class="delete" (click)="goToDetails()"> View</button>-->
+            <!--<small>
+            <button class="deleteBus" (click)="delete(issue)">Delete</button>
+            <button class="delete" (click)="resolve(issue)">Resolve</button>
+            </small>-->
         </li>
     </ul>
     <div *ngIf = "this.isOnDetails">

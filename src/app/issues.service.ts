@@ -148,6 +148,7 @@ export class IssuesService{
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             },
             success: function(msg, a, res){
+                if(res.responseJson != undefined)
                 return res.responseJson.data as Issue;
             }
         });

@@ -12,18 +12,18 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--<div *ngIf = "issues.length>0">-->
-    <h1>Stops</h1>
+    <h1>Courses</h1>
     <ul class = "list-group">
-        <li *ngFor="let stop of stops" class="list-group-item"
+        <li *ngFor="let course of courses" class="list-group-item"
         [class.selected] = "stop===selectedStop"
         (click)="onSelect()">
-                <span>{{stop.name}}</span>
+                <span>{{course.name}}</span>
             <!--<button class="delete" (click)="goToDetails()"> View</button>-->
 
         </li>
     </ul>
-    <div >
+    <!--<div >
         <label>Stop name:</label><input #name/>
         <button class="delete" (click)="add(name.value)">Add</button>
-    </div>
+    </div>-->
     <!--</div>-->

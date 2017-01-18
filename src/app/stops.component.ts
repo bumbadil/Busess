@@ -1,5 +1,6 @@
 import {Component, Injectable, OnInit} from '@angular/core';
 import {MockService} from './in-memory-data.serice';
+import {StopsService} from './stop.service';
 import {Stop} from './stop';
 
 @Component({
@@ -10,13 +11,18 @@ import {Stop} from './stop';
 
 export class StopsComponent implements OnInit{
 
-    constructor(private stopsService:MockService){}
+    constructor(private stopsService:StopsService){}
     
     stops:Stop[];
     selectedStop:Stop;
 
     getStops():void{
-        this.stops = this.stopsService.getStops();
+        this.stopsService.getStops()
+        .then(stops=>this.stops = stops);
+    }
+    add(name:string):void{
+        this.stopsService.createStop(name)
+        .then(stop=>this.stops.push(stop));
     }
     ngOnInit():void{
        this.getStops();
