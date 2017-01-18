@@ -53,4 +53,8 @@ export class CourseService{
             }
         });
     }
+        getCourse(id:number):Promise<Course>{
+        return this.getCourses()
+        .then(courses=> courses.find(course=>course.id === id));
+    }
 }

@@ -18,6 +18,7 @@ import {DashboardComponent} from './dashboard.component';
 import {ProfileComponent} from './profile.component';
 import {CourseComponent} from './course.component'
 import {CourseService} from './course.service';
+import {CourseDetailComponent} from './course-details.component';
 import {AuthGuard} from './auth-guard';
 
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -26,7 +27,7 @@ import { InMemoryDataService }  from './mockApi';
 @NgModule({
   declarations: [
     AppComponent,BussesComponent
-    ,IssuesComponent, CourseComponent,
+    ,IssuesComponent, CourseComponent,CourseDetailComponent,
     StopsComponent, LoginComponent,BusDetailComponent,
     ProfileComponent, DashboardComponent
   ],

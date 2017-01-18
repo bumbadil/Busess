@@ -8,6 +8,7 @@ import {DashboardComponent} from './dashboard.component';
 import {StopsComponent} from './stops.component';
 import {ProfileComponent} from './profile.component';
 import {CourseComponent} from './course.component'
+import {CourseDetailComponent} from './course-details.component';
 import {AuthGuard} from './auth-guard';
 const routes: Routes= [
     {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
@@ -18,6 +19,7 @@ const routes: Routes= [
     {path: 'issues', component: IssuesComponent, canActivate: [AuthGuard]},
     //{path: 'busDetail/:id', component: BusDetailComponent},
     {path: 'busDetail/:id', component: BusDetailComponent, canActivate: [AuthGuard]},
+    {path: 'courseDetail/:id', component: CourseDetailComponent, canActivate: [AuthGuard]},
     {path: 'busDetail', component: BusDetailComponent},
     {path: 'dashboard', component: DashboardComponent},
     //{path: 'stops', component: StopsComponent},

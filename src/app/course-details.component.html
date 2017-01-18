@@ -1,0 +1,23 @@
+<div *ngIf = "Course">
+  <!--<h2>{{bus.name}} details</h2>-->
+    <!--<div><label> id: </label>
+    <input type="number" [(ngModel)]="bus.id" [readonly]="!this.isNew"></div>-->
+     <div><label> Name: </label>
+     <input type="text" [(ngModel)]="Course.name" [readonly]="!this.isNew"></div>
+      <!--<div><label> Spaces: </label>
+      <input type="number" [(ngModel)]="bus.spaces" [readonly]="!this.isNew"></div>
+      <div><label> Registration Number: </label>
+      <input type="text" [(ngModel)]="bus.registration_number" [readonly]="!this.isNew"></div>-->
+    <div>
+        <!--<label>name :</label>-->
+    </div>
+    <!--<div>
+        <issues 
+        [BusID]="bus.id"
+        [isOnDetails]="true">
+        </issues>
+    </div>-->
+
+        <button type="button" class="btn btn-default navbar-btn" (click)="goBack()">Back</button>
+         <button type="button" class="btn btn-default navbar-btn" (click)="save()">Save</button>
+    </div>

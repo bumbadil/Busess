@@ -16,9 +16,9 @@
     <ul class = "list-group">
         <li *ngFor="let course of courses" class="list-group-item"
         [class.selected] = "stop===selectedStop"
-        (click)="onSelect()">
+        (click)="onSelect(course)">
                 <span>{{course.name}}</span>
-            <!--<button class="delete" (click)="goToDetails()"> View</button>-->
+            <button class="delete" (click)="goToDetails()"> View</button>
 
         </li>
     </ul>
