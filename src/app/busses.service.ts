@@ -88,7 +88,10 @@ export class BusService{
             },
            // headers: this.hp,
             success:function(msg, a , res){
-                console.log(res);
+                  localStorage.removeItem('token');
+                  localStorage.removeItem('client');
+                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                localStorage.setItem('client',res.getResponseHeader('Client'));
                 return msg;
             }
         });
@@ -122,6 +125,10 @@ export class BusService{
             },
             url: `${'http://pks-app.herokuapp.com/buses'}/${id}`,
             success:function(msg, a, res){
+                             localStorage.removeItem('token');
+                  localStorage.removeItem('client');
+                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                localStorage.setItem('client',res.getResponseHeader('Client'));
                 console.log('deleted');
             }
         });

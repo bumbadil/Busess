@@ -55,6 +55,10 @@ export class IssuesService{
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             }, 
             success:function(msg, a, res){
+                       localStorage.removeItem('token');
+                  localStorage.removeItem('client');
+                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                localStorage.setItem('client',res.getResponseHeader('Client'));
                 if(res.responseJson != undefined)
                 return res.responseJson.data as Issue[];
             }
@@ -153,6 +157,10 @@ export class IssuesService{
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             },
             success: function(msg, a, res){
+                       localStorage.removeItem('token');
+                  localStorage.removeItem('client');
+                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                localStorage.setItem('client',res.getResponseHeader('Client'));
                 if(res.responseJson != undefined)
                 return res.responseJson.data as Issue;
             }
