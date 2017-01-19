@@ -11,7 +11,7 @@
     <div>
         <!--<label>name :</label>-->
     </div>
-    <div>
+    <div *ngIf="this.canViewIssues">
         <issues 
         [BusID]="bus.id"
         [isOnDetails]="true">

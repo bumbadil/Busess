@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core'
 import {Course} from './Course';
 import {Http, Headers} from '@angular/http';
-
+import {Bus} from './bus';
+import {Stop} from './stop';
 import 'rxjs/add/operator/toPromise';
 let $ = require('/usr/local/lib/node_modules/jquery/dist/jquery.min.js');
 @Injectable()
@@ -57,4 +58,26 @@ export class CourseService{
         return this.getCourses()
         .then(courses=> courses.find(course=>course.id === id));
     }
+
+    getCourseBuses(id:number):Promise<Bus[]>{
+         const url = `${'http://pks-app.herokuapp.com/courses'}/${id}/${'buses'}`;
+        let token:string = localStorage.getItem('token');
+        let client:string = localStorage.getItem('client');
+         return $.ajax({
+             type: "GET",
+             url: url,
+             beforeSend: function(xhr){
+                xhr.setRequestHeader
+                xhr.setRequestHeader('Access-Token',token);
+        xhr.setRequestHeader('Client', client);
+       xhr.setRequestHeader('Token-Type','Bearer');
+       xhr.setRequestHeader('Uid','admin@test.com');
+        xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+            }, 
+            success:function(msg, a, res){
+                if(res.responseJson != undefined)
+                return res.responseJson.data as Bus[];
+            }
+         });
+     }
 }

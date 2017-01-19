@@ -16,7 +16,7 @@ export class CourseDetailComponent implements OnInit{
     Course:Course;
     @Input()
     isNew:boolean;
-    busses:Bus[];
+    buses:Bus[];
     stops:Stop[];
     constructor(private courseService:CourseService
     ,private route:ActivatedRoute
@@ -30,6 +30,8 @@ export class CourseDetailComponent implements OnInit{
             if(id !=0 ){;
             this.courseService.getCourse(id)
             .then(course=>this.Course = course);  
+            this.courseService.getCourseBuses(id).
+            then(buses=>this.buses=buses);
             this.isNew = false;      
             }else{
                 this.Course = new Course();  

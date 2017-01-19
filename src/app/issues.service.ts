@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers} from '@angular/http';
 import {Issue} from './issue';
+import {AuthService} from './auth.service'
 import 'rxjs/add/operator/toPromise';
 let $ = require('/usr/local/lib/node_modules/jquery/dist/jquery.min.js');
 @Injectable()
@@ -15,7 +16,7 @@ export class IssuesService{
             'Content-Type':'application/json'
         });
     
-    constructor(private http:Http) {
+    constructor(private http:Http, private authService:AuthService) {
         
         
     }
@@ -41,6 +42,7 @@ export class IssuesService{
          const url = `${'http://pks-app.herokuapp.com/buses'}/${id}/${'issues'}`;
         let token:string = localStorage.getItem('token');
         let client:string = localStorage.getItem('client');
+        var uid = this.authService.currentUser.uid;
          return $.ajax({
              type: "GET",
              url: url,
@@ -49,7 +51,7 @@ export class IssuesService{
                 xhr.setRequestHeader('Access-Token',token);
         xhr.setRequestHeader('Client', client);
        xhr.setRequestHeader('Token-Type','Bearer');
-       xhr.setRequestHeader('Uid','admin@test.com');
+       xhr.setRequestHeader('Uid',uid);
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             }, 
             success:function(msg, a, res){
@@ -73,6 +75,7 @@ export class IssuesService{
          const url = `${'http://pks-app.herokuapp.com/issues'}/${issue.id}`;
          let token:string = localStorage.getItem('token');
         let client:string = localStorage.getItem('client');
+        var uid = this.authService.currentUser.uid;
          return $.ajax({
              type: 'Put',
              url:url,
@@ -84,7 +87,7 @@ export class IssuesService{
                 xhr.setRequestHeader('Access-Token',token);
         xhr.setRequestHeader('Client', client);
        xhr.setRequestHeader('Token-Type','Bearer');
-       xhr.setRequestHeader('Uid','admin@test.com');
+       xhr.setRequestHeader('Uid',uid);
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             }
          });
@@ -107,6 +110,7 @@ export class IssuesService{
            const url = `${'http://pks-app.herokuapp.com/issues'}/${issue.id}`;
            let token:string = localStorage.getItem('token');
         let client:string = localStorage.getItem('client');
+        var uid = this.authService.currentUser.uid;
         return $.ajax({
             type:'DELETE',
             url: url,
@@ -115,7 +119,7 @@ export class IssuesService{
                 xhr.setRequestHeader('Access-Token',token);
         xhr.setRequestHeader('Client', client);
        xhr.setRequestHeader('Token-Type','Bearer');
-       xhr.setRequestHeader('Uid','admin@test.com');
+       xhr.setRequestHeader('Uid',uid);
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             }
         });
@@ -131,6 +135,7 @@ export class IssuesService{
          const url = `${'http://pks-app.herokuapp.com/buses'}/${issue.busID}/${'issues'}`;
           let token:string = localStorage.getItem('token');
         let client:string = localStorage.getItem('client');
+        var uid = this.authService.currentUser.uid;
         return $.ajax({
             type: 'POST',
             url:url,
@@ -144,7 +149,7 @@ export class IssuesService{
                 xhr.setRequestHeader('Access-Token',token);
         xhr.setRequestHeader('Client', client);
        xhr.setRequestHeader('Token-Type','Bearer');
-       xhr.setRequestHeader('Uid','admin@test.com');
+       xhr.setRequestHeader('Uid',uid);
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             },
             success: function(msg, a, res){
@@ -164,4 +169,7 @@ export class IssuesService{
          console.log('error occured', error);
          return Promise.reject(error.message|| error);
      }
+         userAccess():string{
+        return this.authService.getUserRole();
+    }
 }

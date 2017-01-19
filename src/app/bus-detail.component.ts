@@ -19,6 +19,7 @@ export class BusDetailComponent implements OnInit{
     ,private route:ActivatedRoute
     ,private location:Location){}
     
+    canViewIssues:boolean;
 
     ngOnInit():void{
         this.route.params.forEach((params:Params)=>
@@ -27,16 +28,22 @@ export class BusDetailComponent implements OnInit{
             if(id !=0 ){;
             this.busDetailService.getBus(id)
             .then(bus=>this.bus = bus);  
-            this.isNew = false;      
+            this.isNew = false;                
             }else{
                 this.bus = new Bus();  
                 this.isNew = true;        
             }
+            this.setAccess();
         })
     }
     save():void{
         this.busDetailService.create(this.bus)
         .then(()=>this.location.back());
+    }
+        setAccess(){
+        var role = this.busDetailService.userAccess();
+        this.canViewIssues = (role==='admin' || role==='mechanic' || role==="driver");
+        console.log(this.canViewIssues);
     }
     goBack():void{
         this.location.back();

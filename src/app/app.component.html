@@ -50,9 +50,9 @@
         <li><a href="#">Issues</a></li>
         <li><a href="#">Stops</a></li>
         <li><a href="#">Contact</a></li>-->
-       <li> <a routerLink="/busses">Busses</a></li>
-        <li><a routerLink="/issues">Issues</a></li>
-       <li> <a routerLink="/stops">Stops</a>  </li>
+       <li *ngIf="this.authService.getUserRole()!='passenger'"> <a routerLink="/busses">Busses</a></li>
+        <li *ngIf="this.authService.getUserRole()!='passenger'"><a routerLink="/issues">Issues</a></li>
+       <li *ngIf="this.authService.getUserRole()!='passenger'"> <a routerLink="/stops">Stops</a>  </li>
        <li> <a routerLink="/course">Course</a>  </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -65,7 +65,9 @@
 
 <div class="jumbotron">
   <div class="container text-center">
-   <router-outlet></router-outlet>
+   <router-outlet
+     (onLogin)="onLogin($event)">
+   </router-outlet>
   </div>
 </div>
 

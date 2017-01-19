@@ -59,6 +59,8 @@ export class IssuesComponent implements OnInit{
     @Input()
     isOnDetails:boolean;
 
+    canDelete:boolean;
+    canResolve:boolean;
     delete(issue:Issue):void{
         this.issuesService.delete(issue)
         .then(()=>{
@@ -92,6 +94,11 @@ export class IssuesComponent implements OnInit{
         }else{       
          this.getIssue(this.BusID);
         }
+        this.setAccess();
     }
-
+        setAccess(){
+        var role = this.issuesService.userAccess();
+        this.canDelete = role==='admin';
+        this.canResolve= (role==='admin' || role==='mechanic');
+    }
 }

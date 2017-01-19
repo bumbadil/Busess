@@ -17,7 +17,14 @@
         [isOnDetails]="true">
         </issues>
     </div>-->
-
+    <div>
+        <ul class = "list-group">
+        <li *ngFor="let bus of buses" class="list-group-item">    
+            <!--<span class="badge">{{bus.id}}</span>-->
+            <span>{{bus.brand}}</span>
+        </li>
+    </ul>
+    </div>
         <button type="button" class="btn btn-default navbar-btn" (click)="goBack()">Back</button>
          <button type="button" class="btn btn-default navbar-btn" (click)="save()">Save</button>
     </div>

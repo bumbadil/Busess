@@ -3,11 +3,11 @@ import {Http, Headers} from '@angular/http';
 import {Bus} from './bus';
 let $ = require('/usr/local/lib/node_modules/jquery/dist/jquery.min.js');
 import 'rxjs/add/operator/toPromise';
-
+import {AuthService} from './auth.service';
 @Injectable()
 export class BusService{
 
-    constructor(private http: Http){}
+    constructor(private http: Http, private authService:AuthService){}
 
     //private bussesUrl = '/buses'
     private bussesUrl = 'app/busses'
@@ -68,11 +68,7 @@ export class BusService{
     create(bus:Bus):Promise<any>{
         let token:string = localStorage.getItem('token');
         let client:string = localStorage.getItem('client');
-        this.hp.append('Access-Token',token);
-        this.hp.append('Client', client);
-       this.hp.append('Token-Type','Bearer');
-       this.hp.append('Uid','admin@test.com');
-        this.hp.append( 'Content-Type','application/x-www-form-urlencoded');
+        var uid = this.authService.currentUser.uid;
         console.log(bus);
         return $.ajax({
             type: "POST",
@@ -82,7 +78,7 @@ export class BusService{
                 xhr.setRequestHeader('Access-Token',token);
         xhr.setRequestHeader('Client', client);
        xhr.setRequestHeader('Token-Type','Bearer');
-       xhr.setRequestHeader('Uid','admin@test.com');
+       xhr.setRequestHeader('Uid',uid);
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             },
             data: {
@@ -113,6 +109,7 @@ export class BusService{
     delete(id:number):Promise<void>{
        let token:string = localStorage.getItem('token');
         let client:string = localStorage.getItem('client');
+        var uid = this.authService.currentUser.uid;
         return $.ajax({
             type : "DELETE",
             beforeSend: function(xhr){
@@ -120,7 +117,7 @@ export class BusService{
                 xhr.setRequestHeader('Access-Token',token);
         xhr.setRequestHeader('Client', client);
        xhr.setRequestHeader('Token-Type','Bearer');
-       xhr.setRequestHeader('Uid','admin@test.com');
+       xhr.setRequestHeader('Uid',uid);
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             },
             url: `${'http://pks-app.herokuapp.com/buses'}/${id}`,
@@ -144,5 +141,9 @@ export class BusService{
     private handleError(error:any):Promise<any>{
         console.error('An error occured', error);
         return Promise.reject(error.message || error);
+    }
+
+    userAccess():string{
+        return this.authService.getUserRole();
     }
 } 

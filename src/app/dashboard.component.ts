@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, EventEmitter, Output} from '@angular/core';
 import {AuthService} from './auth.service';
 import {Router} from '@angular/router';
 import {User} from './user';
@@ -13,6 +13,8 @@ export class DashboardComponent{
      constructor(private authService:AuthService, private router:Router){}
     user:User;
     loggedIn:boolean = false;
+    @Output()
+    onLogin = new EventEmitter<string>();
 
     login(a:string, b:string):void{
         console.log('siema');
@@ -45,8 +47,15 @@ export class DashboardComponent{
          console.log(this.user.uid);   
         })//this.user = user)
         .then(()=>{ this.authService.loggedIn=true;
-            this.authService.IsLoggedIn();
-           this.router.navigate(['/busses'])  });
+                    this.authService.currentUser = this.user;
+                    this.onLogin.emit(this.user.role);
+            //this.authService.IsLoggedIn();
+            if(this.user.role==='passenger'){
+                this.router.navigate(['/course']) 
+            }else{
+                this.router.navigate(['/busses']) 
+            }
+            });
         // if(this.user != null){
         //     this.loggedIn = true;
         //     this.router.navigate(['/busses']);

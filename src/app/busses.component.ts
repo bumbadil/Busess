@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Bus} from './bus';
 import {BusService} from './busses.service';
 import {Router} from '@angular/router';
+
 @Component({
     selector:'busses',
     templateUrl: 'busses.component.html',
@@ -13,6 +14,7 @@ export class BussesComponent implements OnInit{
 
     busses : Bus[];
     selectedBus:Bus;
+    canDelete:boolean;
     constructor(private busService:BusService, private router:Router){
 
     }
@@ -52,7 +54,12 @@ export class BussesComponent implements OnInit{
         let link = ['/busDetail',0];
         this.router.navigate(link);
     }
+    setAccess(){
+        var role = this.busService.userAccess();
+        this.canDelete = role==='admin';
+    }
     ngOnInit():void{
         this.getBusses();
+        this.setAccess();
     }
 }

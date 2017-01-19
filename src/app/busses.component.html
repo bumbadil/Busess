@@ -23,8 +23,8 @@
         
             <!--<span class="badge">{{bus.id}}</span>-->
             <span>{{bus.brand}}</span>
-            <button class="delete" (click)="goToDetails()"> View</button>
-            <button class="deleteBus" (click)="delete(this.selectedBus)" >Delete</button>
+            <button  class="delete" (click)="goToDetails()"> View</button>
+            <button *ngIf="this.canDelete" class="deleteBus" (click)="delete(this.selectedBus)" >Delete</button>
         </li>
     </ul>
-    <button type="button" class="btn btn-default navbar-btn" (click)="createNew()">Add</button>
+    <button *ngIf="this.canDelete" type="button" class="btn btn-default navbar-btn" (click)="createNew()">Add</button>

@@ -28,8 +28,8 @@
                 <h5 class="mb-1">{{issue.name}}
                 <!--<a data-toggle="collapse" data-parent="name" href="#issues#target">{{issue.name}}</a>-->
                      <small>
-            <button class="deleteBus" (click)="delete(issue)">Delete</button>
-            <button class="delete" (click)="resolve(issue)">Resolve</button>
+            <button *ngIf="this.canDelete" class="deleteBus" (click)="delete(issue)">Delete</button>
+            <button *ngIf="this.canResolve" class="delete" (click)="resolve(issue)">Resolve</button>
             </small>
             </h5>
                 </div>

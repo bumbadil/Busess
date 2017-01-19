@@ -8,7 +8,7 @@ let $ = require('/usr/local/lib/node_modules/jquery/dist/jquery.min.js');
 @Injectable()
 export class AuthService{
     
-    constructor(private http:Http){}
+ constructor(private http:Http){}
 
   private headers = new Headers(
         {
@@ -26,6 +26,7 @@ export class AuthService{
         method: RequestMethod.Post,
 
     });
+    currentUser:User;
     public loggedIn:boolean = false;
 
         login(login:string, password:string):Promise<User>{
@@ -133,5 +134,18 @@ export class AuthService{
         }
         return false;
     }    
-    
+    getUserRole():string{
+        if(this.currentUser!=undefined){
+         return this.currentUser.role;
+        }
+    }
+    setHeaders(xhr:XMLHttpRequest):void{
+                let token:string = localStorage.getItem('token');
+        let client:string = localStorage.getItem('client');
+                xhr.setRequestHeader('Access-Token',token);
+        xhr.setRequestHeader('Client', client);
+       xhr.setRequestHeader('Token-Type','Bearer');
+       xhr.setRequestHeader('Uid','admin@test.com');
+        xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+    }
 }
