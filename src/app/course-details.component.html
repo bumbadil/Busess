@@ -18,10 +18,20 @@
         </issues>
     </div>-->
     <div>
+        <h1>Buses</h1>
         <ul class = "list-group">
         <li *ngFor="let bus of buses" class="list-group-item">    
             <!--<span class="badge">{{bus.id}}</span>-->
             <span>{{bus.brand}}</span>
+        </li>
+    </ul>
+    </div>
+     <div>
+         <h1>Stops</h1>
+        <ul class = "list-group">
+        <li *ngFor="let stop of stops" class="list-group-item">    
+            <!--<span class="badge">{{bus.id}}</span>-->
+            <span>{{stop.name}}</span>
         </li>
     </ul>
     </div>

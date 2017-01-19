@@ -32,6 +32,8 @@ export class CourseDetailComponent implements OnInit{
             .then(course=>this.Course = course);  
             this.courseService.getCourseBuses(id).
             then(buses=>this.buses=buses);
+            this.courseService.getCourseStops(id).
+            then(stops=>this.stops = stops);
             this.isNew = false;      
             }else{
                 this.Course = new Course();  

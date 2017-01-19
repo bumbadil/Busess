@@ -80,4 +80,26 @@ export class CourseService{
             }
          });
      }
+     getCourseStops(id:number):Promise<Stop[]>{
+         const url = `${'http://pks-app.herokuapp.com/courses'}/${id}/${'stops'}`;
+        let token:string = localStorage.getItem('token');
+        let client:string = localStorage.getItem('client');
+         return $.ajax({
+             type: "GET",
+             url: url,
+             beforeSend: function(xhr){
+                xhr.setRequestHeader
+                xhr.setRequestHeader('Access-Token',token);
+        xhr.setRequestHeader('Client', client);
+       xhr.setRequestHeader('Token-Type','Bearer');
+       xhr.setRequestHeader('Uid','admin@test.com');
+        xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+            }, 
+            success:function(msg, a, res){
+                if(res.responseJson != undefined)
+                return res.responseJson.data as Stop[];
+            }
+         });
+     }
+     
 }
