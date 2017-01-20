@@ -125,11 +125,11 @@ export class AuthService{
         this.loggedIn = false;
     }
     IsLoggedIn():boolean{
-        console.log(this.loggedIn);
+        //console.log(this.loggedIn);
         if(this.loggedIn)
         {
-            console.log('lol');
-            console.log(localStorage.getItem('user'));
+            //console.log('lol');
+           // console.log(localStorage.getItem('user'));
             return true;  
         }
         return false;

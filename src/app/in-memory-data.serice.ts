@@ -9,11 +9,11 @@ export class MockService{
         {id:1,name:'dziura', description:'w oponie', bus_id:12, solved:false},
         {id:2,name:'szpara', description:'w drzwiach', bus_id:13, solved:true},
     ]
-    stops:Stop[]= [
-        {name:'Wroclaw'},
-        {name:'Poznan'},
-        {name:'Gdansk'}
-    ]
+    // stops:Stop[]= [
+    //     {name:'Wroclaw'},
+    //     {name:'Poznan'},
+    //     {name:'Gdansk'}
+    // ]
     getIssues():Issue[]{
         return this.issues;
     }
@@ -24,7 +24,7 @@ export class MockService{
       });
     }
     
-    getStops():Stop[]{
-        return this.stops;
-    }
+    // getStops():Stop[]{
+    //     return this.stops;
+    // }
 }

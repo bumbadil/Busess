@@ -16,8 +16,9 @@
     <ul class = "list-group">
         <li *ngFor="let stop of stops" class="list-group-item"
         [class.selected] = "stop===selectedStop"
-        (click)="onSelect()">
+        (click)="onSelect(stop)">
                 <span>{{stop.name}}</span>
+                <button *ngIf="this.canDelete" class="delete" (click)="delete(stop)" >Delete</button>
             <!--<button class="delete" (click)="goToDetails()"> View</button>-->
 
         </li>

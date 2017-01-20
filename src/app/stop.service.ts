@@ -54,4 +54,33 @@ export class StopsService{
             }
         });
     }
+    delete(stop:Stop):Promise<Stop>{
+        let token:string = localStorage.getItem('token');
+        let client:string = localStorage.getItem('client');
+        return $.ajax({
+            type:'DELETE',
+            url:`${'http://pks-app.herokuapp.com/stops'}/${stop.id}`,
+             beforeSend: function(xhr){
+                xhr.setRequestHeader
+                xhr.setRequestHeader('Access-Token',token);
+        xhr.setRequestHeader('Client', client);
+       xhr.setRequestHeader('Token-Type','Bearer');
+       xhr.setRequestHeader('Uid','admin@test.com');
+        xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+            },
+             success:function(msg, a , res){
+                                    var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client')
+                if(newToken!=null)
+                {
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
+            }
+        });
+    }
 }

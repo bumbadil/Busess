@@ -1,3 +1,8 @@
+ <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <div *ngIf = "Course">
   <!--<h2>{{bus.name}} details</h2>-->
     <!--<div><label> id: </label>
@@ -25,6 +30,7 @@
             <span>{{bus.brand}}</span>
         </li>
     </ul>
+    
     </div>
      <div>
          <h1>Stops</h1>
@@ -34,6 +40,19 @@
             <span>{{stop.name}}</span>
         </li>
     </ul>
+          <div class="col-lg-6">
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Stop
+        </button>
+        <div class="dropdown-menu">
+          <a *ngFor="let stop of stops" class="dropdown-item" >{{stop.name}}</a>
+        </div>
+      </div>
+      <input type="text" class="form-control" aria-label="Text input with dropdown button">
+    </div>
+  </div>
     </div>
         <button type="button" class="btn btn-default navbar-btn" (click)="goBack()">Back</button>
          <button type="button" class="btn btn-default navbar-btn" (click)="save()">Save</button>
