@@ -56,7 +56,8 @@
        <li> <a routerLink="/course">Course</a>  </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/dashboard"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+
+        <li *ngIf="this.authService.IsLoggedIn()"><a href="/dashboard"><span class="glyphicon glyphicon-log-in"></span> {{this.authService.currentUser.uid}} Logout</a></li>
         <!--<login></login>-->
       </ul>
     </div>

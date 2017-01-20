@@ -55,10 +55,23 @@ export class IssuesService{
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             }, 
             success:function(msg, a, res){
-                       localStorage.removeItem('token');
-                  localStorage.removeItem('client');
-                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
-                localStorage.setItem('client',res.getResponseHeader('Client'));
+                var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client');
+                console.log(newToken);
+                if(newToken!=null)
+                {
+                    console.log('przepialem')
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    console.log('clinet tez');
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
+                  
+                 
+               
                 if(res.responseJson != undefined)
                 return res.responseJson.data as Issue[];
             }
@@ -66,33 +79,52 @@ export class IssuesService{
      }
      getIssueMock(id:number):Promise<Issue[]>{
           return this.getIssue()
-          .then(issues=>issues.filter(issue=>issue.busID===id));
+          .then(issues=>issues.filter(issue=>issue.bus_id===id));
      }
      updateOLD(issue:Issue):Promise<Issue>{
-         const url = `${this.issueUrl}/${issue.busID}`;
+         const url = `${this.issueUrl}/${issue.bus_id}`;
          return this.http.put(url, JSON.stringify(issue), {headers : this.headers})
          .toPromise()
          .then(()=>issue)
          .catch(this.errorHandler);
      }
-     update(issue:Issue):Promise<Issue>{
+     update(issue:Issue):Promise<any>{
          const url = `${'http://pks-app.herokuapp.com/issues'}/${issue.id}`;
          let token:string = localStorage.getItem('token');
         let client:string = localStorage.getItem('client');
         var uid = this.authService.currentUser.uid;
          return $.ajax({
-             type: 'Put',
+             type: "PUT",
              url:url,
-             body:
-                 {solved:true}
+             data:`${'solved='}${issue.solved}&${'bus_id='}${issue.bus_id}`
              ,
+              statusCode: {
+                403:function(msg){
+                    console.log(msg);
+                }
+            },
              beforeSend: function(xhr){
-                xhr.setRequestHeader
                 xhr.setRequestHeader('Access-Token',token);
         xhr.setRequestHeader('Client', client);
        xhr.setRequestHeader('Token-Type','Bearer');
        xhr.setRequestHeader('Uid',uid);
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+            },
+            success:function(msg, a, res){
+                                          var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client');
+                console.log(newToken);
+                if(newToken!=null)
+                {
+                    console.log('przepialem')
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    console.log('clinet tez');
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
             }
          });
      }
@@ -118,25 +150,41 @@ export class IssuesService{
         return $.ajax({
             type:'DELETE',
             url: url,
+            data:`${'bus_id='}${issue.bus_id}`,
             beforeSend: function(xhr){
-                xhr.setRequestHeader
                 xhr.setRequestHeader('Access-Token',token);
         xhr.setRequestHeader('Client', client);
        xhr.setRequestHeader('Token-Type','Bearer');
        xhr.setRequestHeader('Uid',uid);
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
+            }, 
+            success:function(msg, a, res){
+                                   var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client');
+                console.log(newToken);
+                if(newToken!=null)
+                {
+                    console.log('przepialem')
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    console.log('clinet tez');
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
             }
         });
       }
      createOLD(issue:Issue):Promise<Issue>{
-         const url = this.busIssueUrl.replace('placeHolder',`${issue.busID}`);
+         const url = this.busIssueUrl.replace('placeHolder',`${issue.bus_id}`);
          return this.http.post(url, JSON.stringify(issue), {headers:this.headers})
          .toPromise()
          .then(res=>res.json().data)
          .catch(this.errorHandler);
      }
      create(issue:Issue):Promise<Issue>{
-         const url = `${'http://pks-app.herokuapp.com/buses'}/${issue.busID}/${'issues'}`;
+         const url = `${'http://pks-app.herokuapp.com/buses'}/${issue.bus_id}/${'issues'}`;
           let token:string = localStorage.getItem('token');
         let client:string = localStorage.getItem('client');
         var uid = this.authService.currentUser.uid;
@@ -157,10 +205,20 @@ export class IssuesService{
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             },
             success: function(msg, a, res){
-                       localStorage.removeItem('token');
-                  localStorage.removeItem('client');
-                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
-                localStorage.setItem('client',res.getResponseHeader('Client'));
+                                   var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client');
+                console.log(newToken);
+                if(newToken!=null)
+                {
+                    console.log('przepialem')
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    console.log('clinet tez');
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
                 if(res.responseJson != undefined)
                 return res.responseJson.data as Issue;
             }

@@ -24,7 +24,7 @@
                 [class.NotResolved] ="!issue.solved"
         [class.resolved] = "issue.solved">
             <button *ngIf="this.canDelete" class="deleteBus" (click)="delete(issue)">Delete</button>
-            <button *ngIf="this.canResolve" class="delete" (click)="resolve(issue)">Resolve</button>
+            <button *ngIf="this.canResolve && !issue.solved" class="delete" (click)="resolve(issue)">Resolve</button>
             <h4 class="list-group-item-heading">{{issue.name}}</h4>
                 <h5 class="list-group-item-text">{{issue.description}}</h5>
         </div>

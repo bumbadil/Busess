@@ -25,10 +25,17 @@ export class CourseService{
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             },
             success: function(msg, a, res){
-                       localStorage.removeItem('token');
-                  localStorage.removeItem('client');
-                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
-                localStorage.setItem('client',res.getResponseHeader('Client'));
+                                      var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client')
+                if(newToken!=null)
+                {
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
                var obj  = res.responseJSON.data as Course[]
                return obj
            } 
@@ -52,10 +59,17 @@ export class CourseService{
             name:name   
             },
             success:function(msg, a , res){
-                       localStorage.removeItem('token');
-                  localStorage.removeItem('client');
-                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
-                localStorage.setItem('client',res.getResponseHeader('Client'));
+                                      var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client')
+                if(newToken!=null)
+                {
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
                 if(res.responseJson != undefined)
                 var obj = res.responseJson.data as Course
                 return res;
@@ -83,10 +97,17 @@ export class CourseService{
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             }, 
             success:function(msg, a, res){
-                       localStorage.removeItem('token');
-                  localStorage.removeItem('client');
-                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
-                localStorage.setItem('client',res.getResponseHeader('Client'));
+                                      var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client')
+                if(newToken!=null)
+                {
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
                 if(res.responseJson != undefined)
                 return res.responseJson.data as Bus[];
             }
@@ -108,10 +129,17 @@ export class CourseService{
         xhr.setRequestHeader( 'Content-Type','application/x-www-form-urlencoded');
             }, 
             success:function(msg, a, res){
-                       localStorage.removeItem('token');
-                  localStorage.removeItem('client');
-                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
-                localStorage.setItem('client',res.getResponseHeader('Client'));
+                                      var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client')
+                if(newToken!=null)
+                {
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
                 if(res.responseJson != undefined)
                 return res.responseJson.data as Stop[];
             }

@@ -37,10 +37,17 @@ export class StopsService{
             name:name   
             },
             success:function(msg, a , res){
-                       localStorage.removeItem('token');
-                  localStorage.removeItem('client');
-                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
-                localStorage.setItem('client',res.getResponseHeader('Client'));
+                                    var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client')
+                if(newToken!=null)
+                {
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
                 if(res.responseJson != undefined)
                 var obj = res.responseJson.data as Stop
                 return res;

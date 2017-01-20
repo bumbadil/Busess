@@ -39,6 +39,17 @@ export class BusService{
            method: 'GET',
            url: 'http://pks-app.herokuapp.com/buses',
            success: function(msg, a, res){
+                               var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client')
+                if(newToken!=null)
+                {
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
                var obj  = res.responseJSON.data as Bus[]
                return obj
            }           
@@ -88,10 +99,17 @@ export class BusService{
             },
            // headers: this.hp,
             success:function(msg, a , res){
-                  localStorage.removeItem('token');
-                  localStorage.removeItem('client');
-                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
-                localStorage.setItem('client',res.getResponseHeader('Client'));
+                                  var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client')
+                if(newToken!=null)
+                {
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
                 return msg;
             }
         });
@@ -125,10 +143,17 @@ export class BusService{
             },
             url: `${'http://pks-app.herokuapp.com/buses'}/${id}`,
             success:function(msg, a, res){
-                             localStorage.removeItem('token');
-                  localStorage.removeItem('client');
-                   localStorage.setItem('token',res.getResponseHeader('Access-Token'));
-                localStorage.setItem('client',res.getResponseHeader('Client'));
+                                var newToken = res.getResponseHeader('Access-Token');
+                var newClient = res.getResponseHeader('Client')
+                if(newToken!=null)
+                {
+                    localStorage.removeItem('token');
+                      localStorage.setItem('token',res.getResponseHeader('Access-Token'));
+                }
+                if(newClient!=null){
+                    localStorage.removeItem('client');
+                     localStorage.setItem('client',res.getResponseHeader('Client'));
+                }
                 console.log('deleted');
             }
         });

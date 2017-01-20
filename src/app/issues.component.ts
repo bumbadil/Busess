@@ -78,7 +78,7 @@ export class IssuesComponent implements OnInit{
         issue.name = name;
         issue.description = description;
         issue.solved = false;
-        issue.busID = this.BusID;
+        issue.bus_id = this.BusID;
         this.issuesService.create(issue)
         .then(i=>this.issues.push(i));
     }
